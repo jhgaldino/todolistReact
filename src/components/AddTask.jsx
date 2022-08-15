@@ -42,7 +42,7 @@ handleSubmit = (event) => {
     return (
         <form onSubmit={(event)=> this.handleSubmit(event)}>
           <input type="text" value={title} onChange={this.handleImput.title}/>
-          <input type="datetime-local" value={date} onChange={this.handleImput.datetime}/>
+          <input type="datetime-local" value={date} onChange={this.handleImput.date}/>
           <input type="time" value={time} onChange={this.handleImput.time}/>
           <button type="submit">Adicionar</button>
         </form>
