@@ -17,7 +17,7 @@ export default class Task extends Component {
 }
     render() {
     const { isCompleted } = this.state;    
-    const {data, onRemove, onEdit, checked } = this.props;
+    const {data, onRemove, onEdit } = this.props;
     const {id,title,dateTime,durationTime} = data;     
     return (
       <div>
@@ -25,7 +25,7 @@ export default class Task extends Component {
         {title}{dateTime}{durationTime}
         <button type="button" onClick={()=>onRemove(id)}>Remover Tarefa</button>
         <button type="button" onClick={()=>onEdit(id)}>Editar Tarefa</button>
-        checked={task.isCompleted}
+        
       </div>
     )
   }
@@ -33,7 +33,10 @@ export default class Task extends Component {
 
 Task.propTypes = {
     data: PropTypes.shape({
-        title: PropTypes.string
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string,
+        data: PropTypes.string,
+        durationTime: PropTypes.string
     }),
     onRemove: PropTypes.func,
     onEdit: PropTypes.func,

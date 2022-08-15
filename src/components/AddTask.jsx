@@ -14,9 +14,6 @@ export default class AddTask extends Component {
     };
   
     this.state = this.Initialstate;
-
-    this.handleImput = this.handleImput.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleImput (event) {
@@ -45,8 +42,8 @@ handleSubmit = (event) => {
     return (
         <form onSubmit={(event)=> this.handleSubmit(event)}>
           <input type="text" value={title} onChange={this.handleImput.title}/>
-          <input type="datetime-local" value={dateTime} onChange={this.handleImput.datetime}/>
-          <input type="time" value={durationTime} onChange={this.handleImput.durationtime}/>
+          <input type="datetime-local" value={date} onChange={this.handleImput.datetime}/>
+          <input type="time" value={time} onChange={this.handleImput.time}/>
           <button type="submit">Adicionar</button>
         </form>
     )

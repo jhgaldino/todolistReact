@@ -1,6 +1,7 @@
 
 import React, {Component} from "react";
 import AddTask from "./components/AddTask";
+import Task from "./components/Task";
 class App extends Component {
   constructor(){
     super();
@@ -10,24 +11,6 @@ class App extends Component {
     this.createTask = this.createTask.bind(this);
     this.removeTask = this.removeTask.bind(this);
     this.editTask = this.editTask.bind(this);
-  }
-  componentDidMount(){
-    const tasks = localStorage.getItem("tasks");
-    localStorageTasks = JSON.parse(localStorageTasks);
-    if(tasks){
-      this.setState({
-        tasks: JSON.parse(tasks),
-      });
-    }
-  }
-
-  loadTasksfromLocalStorage(){
-    let localStorageTasks = localStorage.getItem("tasks");
-    if(localStorageTasks){
-      this.setState({
-        tasks:localStorageTasks,
-      });
-    }
   }
 
 
@@ -73,17 +56,18 @@ class App extends Component {
     const {tasks} = this.state;
     return (
       <>
-      <AddTask onCreate={this.createTask}/>
-      {tasks.map((task) => (
-        <Task 
-          key={task.id} 
-          data={task}>
-          onRemove={this.removeTask}
-          onEdit={this.editTask} 
+        <AddTask onCreate={this.createTask}/>
+        {tasks.map((task) => (
+        <Task key={task.id} data={task} 
+        onRemove={this.removeTask}
+        onEdit={this.editTask} 
         />
-      ))}
+        ))}
+      
+     
       </>
+      
     );
   }
-}
+}  
 export default App;
