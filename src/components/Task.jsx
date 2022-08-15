@@ -18,11 +18,11 @@ export default class Task extends Component {
     render() {
     const { isCompleted } = this.state;    
     const {data, onRemove, onEdit } = this.props;
-    const {id,title,dateTime,durationTime} = data;     
+    const {id,title,date,time} = data;     
     return (
       <div>
         <input type="checkbox" onChange={this.handleCheckBox} checked={isCompleted}/>
-        {title}{dateTime}{durationTime}
+        {title}{date}{time}
         <button type="button" onClick={()=>onRemove(id)}>Remover Tarefa</button>
         <button type="button" onClick={()=>onEdit(id)}>Editar Tarefa</button>
         

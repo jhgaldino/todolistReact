@@ -8,8 +8,8 @@ export default class AddTask extends Component {
     this.Initialstate = {
       id : 0 ,
       title: '', 
-      dateTime: '', 
-      durationTime: '', 
+      date: '', 
+      time: '', 
       isCompleted: false,
     };
   
@@ -21,8 +21,8 @@ export default class AddTask extends Component {
     this.setState({
     id : randomId(999999),  
     title : event.target.value,
-    dateTime : event.target.value,
-    durationTime : event.target.value,
+    date : event.target.value,
+    time : event.target.value,
   });
 }
 
@@ -42,7 +42,7 @@ handleSubmit = (event) => {
     return (
         <form onSubmit={(event)=> this.handleSubmit(event)}>
           <input type="text" value={title} onChange={this.handleImput.title}/>
-          <input type="datetime-local" value={date} onChange={this.handleImput.date}/>
+          <input type="date" value={date} onChange={this.handleImput.date}/>
           <input type="time" value={time} onChange={this.handleImput.time}/>
           <button type="submit">Adicionar</button>
         </form>
