@@ -1,54 +1,49 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import generators from '../lib/generators';
 
 export default class AddTask extends Component {
-  constructor(){
+  constructor() {
     super();
-    this.Initialstate = {
-      id : 0 ,
-      title: '', 
-      date: '', 
-      time: '', 
-      isCompleted: false,
+    this.initialState = {
+      id: 0,
+      title: '',
+      date: '',
+      time: '',
     };
-  
-    this.state = this.Initialstate;
+
+    this.state = this.initialState;
   }
 
-  handleImput (event) {
-    const {randomId} = generators;
-    this.setState({
-    id : randomId(999999),  
-    title : event.target.value,
-    date : event.target.value,
-    time : event.target.value,
-  });
-}
+  handleInput = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
-handleSubmit = (event) => {
-  event.preventDefault();
-  const {onCreate} = this.props;
-  const {id} = this.state;
-  if(id > 0){
-  onCreate(this.state);
-  this.setState(this.Initialstate);
-  }
-}
-    render() {
-      const {title} = this.state;
-      const {date} = this.state;  
-      const {time} = this.state;
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const { onCreate } = this.props;
+    onCreate(this.state);
+    this.setState(this.initialState);
+  };
+
+  render() {
+    const { title, date, time } = this.state;
+
     return (
-        <form onSubmit={(event)=> this.handleSubmit(event)}>
-          <input type="text" value={title} onChange={this.handleImput.title}/>
-          <input type="date" value={date} onChange={this.handleImput.date}/>
-          <input type="time" value={time} onChange={this.handleImput.time}/>
-          <button type="submit">Adicionar</button>
-        </form>
-    )
+      <form onSubmit={this.handleSubmit}>
+        <input
+          type="text"
+          name="title"
+          value={title}
+          onChange={this.handleInput}
+        />
+        <input type="date" name="date" value={date} onChange={this.handleInput} />
+        <input type="time" name="time" value={time} onChange={this.handleInput} />
+        <button type="submit">Adicionar</button>
+      </form>
+    );
   }
 }
 
 AddTask.propTypes = {
-  onCreate: PropTypes.func}.isRequired;
+  onCreate: PropTypes.func.isRequired,
+};
