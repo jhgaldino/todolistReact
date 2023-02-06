@@ -1,49 +1,55 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from "react";
 
-export default class AddTask extends Component {
-  constructor() {
-    super();
-    this.initialState = {
-      id: 0,
-      title: '',
-      date: '',
-      time: '',
-    };
+const AddTask = ({ onCreate }) => {
+  const [task, setTask] = useState({
+    text: "",
+    date: "",
+    time: "",
+    duration: ""
+  });
 
-    this.state = this.initialState;
-  }
-
-  handleInput = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
+  const handleChange = event => {
+    setTask({ ...task, [event.target.name]: event.target.value });
   };
 
-  handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
-    const { onCreate } = this.props;
-    onCreate(this.state);
-    this.setState(this.initialState);
+    const newTask = { ...task, id: Date.now() };
+    onCreate(newTask);
+    setTask({ text: "", date: "", time: "", duration: "" });
   };
 
-  render() {
-    const { title, date, time } = this.state;
-
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <input
-          type="text"
-          name="title"
-          value={title}
-          onChange={this.handleInput}
-        />
-        <input type="date" name="date" value={date} onChange={this.handleInput} />
-        <input type="time" name="time" value={time} onChange={this.handleInput} />
-        <button type="submit">Adicionar</button>
-      </form>
-    );
-  }
-}
-
-AddTask.propTypes = {
-  onCreate: PropTypes.func.isRequired,
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        name="text"
+        value={task.text}
+        placeholder="Digite sua tarefa"
+        onChange={handleChange}
+      />
+      <input
+        type="date"
+        name="date"
+        value={task.date}
+        onChange={handleChange}
+      />
+      <input
+        type="time"
+        name="time"
+        value={task.time}
+        onChange={handleChange}
+      />
+      <input
+        type="text"
+        name="duration"
+        value={task.duration}
+        placeholder="Tempo de duração"
+        onChange={handleChange}
+      />
+      <button type="submit">Adicionar Tarefa</button>
+    </form>
+  );
 };
+
+export default AddTask;
